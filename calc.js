@@ -14,13 +14,17 @@ function clearDisplay(){
 
 function calculate(){
     try{
-        let result = eval(display.value);
+        let expression = display.value;
+        let result = eval(expression);
+        
 
         if (result === Infinity || result === -Infinity || isNaN(result)){
             throw new Error();
         }
 
         display.value = result;
+
+        addToHistory(expression, result);
 
     }
 
@@ -38,5 +42,12 @@ function backspace(){
     }
 }
 
+
+function addToHistory(expression, result) {
+    const historyList = document.getElementById('history');
+    const listItem = document.createElement('li');
+    listItem.textContent = `${expression} = ${result}`;
+    historyList.prepend(listItem);
+}
 
 

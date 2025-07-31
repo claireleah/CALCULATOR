@@ -2,6 +2,22 @@ const display = document.getElementById('display');
 let isError = false;
 function appendToDisplay(input){
     if (isError) return;
+    const lastChar = display.value.slice(-1);
+    const operators = ['+','-','*','/'];
+
+    if(operators.includes(input) && operators.includes(lastChar)){
+        return;
+    }
+
+    if(input === '.') {
+        const parts = display.value.split(/[\+\-\*\/]/);
+        const lastNumber = parts[parts.length - 1];
+
+        if (lastNumber.includes('.')) {
+            return;
+        }
+
+    }
     display.value += input;
 
 }
